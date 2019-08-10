@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://192.168.99.105:8080
+functions:
+  noticias:
+    lang: python3-debian
+    handler: ./noticias
+    image: lapazcloud/noticias:latest
+    readonly_root_filesystem: true
+    environment:
+      write_debug: true
