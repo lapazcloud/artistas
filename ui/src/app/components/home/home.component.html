@@ -1,0 +1,52 @@
+<div class="bg-loader has-background-black-ter" *ngIf="isLoading">
+    <section class="section has-text-centered">
+        <h1 class="subtitle has-text-grey-lighter is-2">Buscando a un nuevo artista...</h1>
+        <progress class="progress is-small" max="100">100%</progress>
+    </section>
+</div>
+
+<div *ngIf="isReady">
+    <div class="bg-image" [ngStyle]="{'background-image': 'url(' + artist.image + ')'}">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+    </div>
+
+    <section class="section">
+        <a (click)="reloadPage()" class="button is-dark is-pulled-right has-background-danger">Nueva recomendación</a>
+    </section>
+
+    <svg height="0">
+        <defs>
+            <filter id="blurryme" x="0" y="0">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="40"/>
+            </filter>
+        </defs>
+    </svg>
+    <section class="hero has-text-centered">
+        <div class="hero-body">
+            <div class="columns">
+                <div class="column is-4 is-offset-4">
+                    <figure class="image is-square">
+                        <img class="has-ratio" [src]="artist.image" [alt]="artist.name">
+                        <span class="tag is-warning is-overlay is-radiusless">#{{ artist.ranking }}</span>
+                    </figure>
+                    <span class="tag is-dark is-large is-size-3">{{ artist.name }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="columns">
+            <div class="column is-4" *ngFor="let track of artist.tracks">
+                <figure class="image is-square">
+                    <img  class="has-ratio" [src]="track.album.cover_big">
+                </figure>
+                <figure class="image">
+                    <audio class="has-ratio is-block" controls preload="none">
+                        <source [src]="track.preview" type="audio/mpeg">
+                    </audio>
+                </figure>
+                <span class="tag is-black is-large">{{ track.title }}</span>            
+            </div>
+        </div>
+    </section>
+</div>

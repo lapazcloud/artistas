@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://192.168.1.203:8080
+functions:
+  obtener-artista:
+    lang: python3-armhf
+    handler: ./obtener-artista
+    image: lapazcloud/obtener-artista:latest
+    readonly_root_filesystem: true
+    environment:
+      write_debug: true
